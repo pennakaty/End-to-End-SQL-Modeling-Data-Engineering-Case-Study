@@ -1,48 +1,45 @@
-Professional Case Study: End-to-End Retail Data Architecture 🛒📊
-This repository contains a comprehensive SQL-based infrastructure for a modern retail ecosystem. It spans from a high-performance OLTP (On-line Transactional Processing) MySQL database to a structured Data Warehouse Staging (BigQuery) environment, demonstrating expertise in relational modeling, data integrity, and scalable architecture.
+## Professional Case Study: End-to-End Retail Data Architecture 🛒📊
+
+This repository features a complete SQL-based data infrastructure for a modern retail ecosystem. It covers the entire journey from a high-performance MySQL OLTP transactional database to a structured BigQuery Staging environment for cloud analytics.
 
 📌 Project Overview
-The objective of this project is to model a real-world retail environment where customers, products, and employees interact across multiple channels. The architecture is designed to handle complex transactional flows while ensuring data lineage and preparation for advanced ELT/ETL processes in the cloud.
+The goal is to model a robust retail environment where customers, products, and employees interact across multiple channels. The architecture ensures transactional integrity while preparing data for advanced ELT/ETL processes in the cloud.
 
 📋 Technical Modules
 1. Relational Database Design (OLTP)
-Normalization: Implements a 3NF structure across core entities including category, product, customer, store, and employee.
+Normalization: Implements a 3NF structure across core entities like category, product, customer, and employee.
 
-Referential Integrity: Utilizes strict FOREIGN KEY constraints with CASCADE and RESTRICT policies to prevent orphaned records in sales data.
+Referential Integrity: Uses strict FOREIGN KEY constraints with CASCADE and RESTRICT policies.
 
-Business Logic Enforcement: Includes CHECK constraints to ensure financial accuracy for quantities, unit prices, and tax amounts.
+Business Rules: Includes CHECK constraints to prevent negative values in prices, quantities, and taxes.
 
 2. Omnichannel Transactional Flow
-Sales Engine: Features a dual-table approach (sales_order and sales_order_line) to support multi-item transactions.
+Sales Engine: A dual-table approach (sales_order and sales_order_line) to support complex multi-item transactions.
 
-Channel Optimization: Supports both IN_STORE and ONLINE sales, mapping store-specific data to physical locations while allowing for direct-to-consumer digital orders.
+Channel Mapping: Native support for both IN_STORE and ONLINE sales channels.
 
-Payment Integration: Models various payment methods, including modern digital wallets like APPLE_PAY and GOOGLE_PAY alongside traditional CARD and CASH options.
+Payment Integration: Models multiple methods including APPLE_PAY, GOOGLE_PAY, CARD, and CASH.
 
 3. Data Automation & Simulation
-Synthetic Data Generation: A robust generate_orders stored procedure creates realistic historical data by simulating customer behavior.
+Synthetic Data Generation: A robust generate_orders stored procedure that simulates realistic historical data.
 
-Dynamic Calculations: Automatically computes VAT (23%), randomized discounts (up to 15%), and total order amounts to populate the database with high-fidelity test data.
+Dynamic Logic: Automatically calculates VAT (23%), random discounts, and totals during the simulation.
 
-Performance Indexing: Strategic use of B-Tree indexes on date and ID columns to optimize query performance for analytical reporting.
+Performance: Strategic indexing on date and ID columns to optimize analytical query speed.
 
-4. Data Warehousing & Cloud Staging
-BigQuery Integration: Defines a staging layer (retail_stg_raw) designed for high-volume ingestion in Google BigQuery.
+4. Cloud Data Warehousing (BigQuery)
+Staging Layer: Dedicated schema (retail_stg_raw) designed for high-volume ingestion in Google BigQuery.
 
-Auditability & Lineage: Every staging table includes metadata columns such as ingestion_ts, source_system, and batch_id to ensure 100% traceability during the data journey.
+Data Lineage: Includes metadata columns like ingestion_ts, source_system, and batch_id for full traceability.
 
 🛠️ Tech Stack
-Language: SQL (MySQL 8.0 & Google BigQuery dialects).
+Databases: MySQL 8.0 & Google BigQuery.
 
-Engine: InnoDB (for ACID compliance and row-level locking).
+Engine: InnoDB for ACID compliance.
 
-Concepts: Stored Procedures, Advanced Indexing, Relational Modeling, Data Lineage.
+Features: Stored Procedures, Advanced Indexing, Relational Modeling.
 
 🚀 How to Use
-Deploy the Schema: Execute the Retail_database.sql script in your MySQL environment to build the tables and relationships.
+Deploy Schema: Run the Retail_database.sql script to build the tables and relationships.
 
-Populate the Database: Run the built-in procedure to generate a custom volume of data:
-
-CALL generate_orders(200); -- Generates 200 orders with associated lines and payments
-
-Run Analytics: Use the provided aggregation queries to view monthly revenue trends or product performance.
+Generate Data: Populate the database with 200+ simulated transactions:
